@@ -1,4 +1,3 @@
-
 import React from 'react';
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
@@ -33,19 +32,23 @@ const MaterialPage = ({ material, onBack }: MaterialPageProps) => {
       content: [
         {
           subtitle: 'Kompresor',
-          text: 'Kompresor berfungsi untuk mengompres refrigeran dari tekanan rendah menjadi tekanan tinggi dan memompa refrigeran ke seluruh sistem.'
+          text: 'Kompresor berfungsi untuk mengompres refrigeran dari tekanan rendah menjadi tekanan tinggi dan memompa refrigeran ke seluruh sistem.',
+          image: '/assets/kompresor.jpeg'
         },
         {
           subtitle: 'Kondensor',
-          text: 'Kondensor berfungsi untuk melepaskan panas dari refrigeran bertekanan tinggi sehingga refrigeran berubah dari gas menjadi cair.'
+          text: 'Kondensor berfungsi untuk melepaskan panas dari refrigeran bertekanan tinggi sehingga refrigeran berubah dari gas menjadi cair.',
+          image: '/assets/kondesor.jpeg'
         },
         {
           subtitle: 'Evaporator',
-          text: 'Evaporator berfungsi untuk menyerap panas dari ruangan sehingga refrigeran berubah dari cair menjadi gas.'
+          text: 'Evaporator berfungsi untuk menyerap panas dari ruangan sehingga refrigeran berubah dari cair menjadi gas.',
+          image: '/assets/evoporator.jpeg'
         },
         {
           subtitle: 'Alat Ekspansi',
-          text: 'Alat ekspansi (katup ekspansi atau pipa kapiler) berfungsi untuk menurunkan tekanan dan suhu refrigeran sebelum masuk ke evaporator.'
+          text: 'Alat ekspansi (katup ekspansi atau pipa kapiler) berfungsi untuk menurunkan tekanan dan suhu refrigeran sebelum masuk ke evaporator.',
+          image: '/assets/alat-ekspansi.jpeg'
         }
       ]
     },
@@ -68,6 +71,7 @@ const MaterialPage = ({ material, onBack }: MaterialPageProps) => {
     },
     siklus: {
       title: 'Siklus Refrigerasi',
+      video: '/assets/siklusrefrigerasi.mp4',
       content: [
         {
           subtitle: 'Proses Kompresi',
@@ -100,10 +104,10 @@ const MaterialPage = ({ material, onBack }: MaterialPageProps) => {
   }
 
   return (
-    <div className="min-h-screen p-6">
-      <div className="max-w-4xl mx-auto">
+    <div className="min-h-screen">
+      <div className="max-w-4xl mx-auto px-4 md:px-6 pt-6">
         <div className="flex items-center gap-4 mb-8">
-          <Button 
+          <Button
             onClick={onBack}
             variant="outline"
             size="sm"
@@ -114,19 +118,48 @@ const MaterialPage = ({ material, onBack }: MaterialPageProps) => {
           </Button>
           <h1 className="text-3xl font-bold text-gray-800">{currentMaterial.title}</h1>
         </div>
-        
-        <div className="space-y-6">
-          {currentMaterial.content.map((section, index) => (
-            <Card key={index} className="shadow-lg border-0">
-              <CardHeader>
-                <CardTitle className="text-xl text-blue-700">{section.subtitle}</CardTitle>
-              </CardHeader>
-              <CardContent>
-                <p className="text-gray-700 leading-relaxed">{section.text}</p>
-              </CardContent>
-            </Card>
-          ))}
+      </div>
+
+      {/* Hero Section untuk video */}
+      {material === 'siklus' && currentMaterial.video && (
+        <div className="relative w-full h-[80vh] overflow-hidden rounded-b-3xl shadow-lg mb-12">
+          <video
+            autoPlay
+            loop
+            muted
+            playsInline
+            className="absolute top-0 left-0 w-full h-full object-cover"
+          >
+            <source src={currentMaterial.video} type="video/mp4" />
+            Browser Anda tidak mendukung pemutar video.
+          </video>
+          <div className="absolute inset-0 bg-black/40 flex items-center justify-center">
+            <h2 className="text-white text-3xl md:text-5xl font-bold drop-shadow-lg">
+              {currentMaterial.title}
+            </h2>
+          </div>
         </div>
+      )}
+
+      {/* Konten materi */}
+      <div className="max-w-4xl mx-auto px-4 md:px-6 space-y-6 pb-12">
+        {currentMaterial.content.map((section, index) => (
+          <Card key={index} className="shadow-lg border-0">
+            <CardHeader>
+              <CardTitle className="text-xl text-blue-700">{section.subtitle}</CardTitle>
+            </CardHeader>
+            <CardContent>
+              {section.image && (
+                <img
+                  src={section.image}
+                  alt={section.subtitle}
+                  className="w-full max-w-md mb-4 rounded shadow"
+                />
+              )}
+              <p className="text-gray-700 leading-relaxed">{section.text}</p>
+            </CardContent>
+          </Card>
+        ))}
       </div>
     </div>
   );
