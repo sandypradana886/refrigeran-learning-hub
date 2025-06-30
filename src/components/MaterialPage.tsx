@@ -71,7 +71,7 @@ const MaterialPage = ({ material, onBack }: MaterialPageProps) => {
     },
     siklus: {
       title: 'Siklus Refrigerasi',
-      video: '/assets/siklusrefrigerasi.mp4',
+      video: '/assets/carakerjakulkas.mp4',
       content: [
         {
           subtitle: 'Proses Kompresi',
@@ -121,25 +121,29 @@ const MaterialPage = ({ material, onBack }: MaterialPageProps) => {
       </div>
 
       {/* Hero Section untuk video */}
-      {material === 'siklus' && currentMaterial.video && (
-        <div className="relative w-full h-[80vh] overflow-hidden rounded-b-3xl shadow-lg mb-12">
-          <video
-            autoPlay
-            loop
-            muted
-            playsInline
-            className="absolute top-0 left-0 w-full h-full object-cover"
-          >
-            <source src={currentMaterial.video} type="video/mp4" />
-            Browser Anda tidak mendukung pemutar video.
-          </video>
-          <div className="absolute inset-0 bg-black/40 flex items-center justify-center">
-            <h2 className="text-white text-3xl md:text-5xl font-bold drop-shadow-lg">
-              {currentMaterial.title}
-            </h2>
-          </div>
-        </div>
-      )}
+   {material === 'siklus' && currentMaterial.video && (
+  <div className="max-w-4xl mx-auto px-4 md:px-6 mb-12">
+    <h2 className="text-center text-3xl md:text-4xl font-bold text-gray-800 mb-4">
+      {currentMaterial.title}
+    </h2>
+    <div className="rounded-2xl overflow-hidden shadow-lg border">
+      <video
+        autoPlay
+        muted
+        controls
+        playsInline
+        className="w-full max-h-[70vh] object-cover"
+        poster="/assets/siklus-thumbnail.jpg" // opsional thumbnail
+      >
+        <source src={currentMaterial.video} type="video/mp4" />
+        Browser Anda tidak mendukung pemutar video.
+      </video>
+    </div>
+  </div>
+)}
+
+
+
 
       {/* Konten materi */}
       <div className="max-w-4xl mx-auto px-4 md:px-6 space-y-6 pb-12">
