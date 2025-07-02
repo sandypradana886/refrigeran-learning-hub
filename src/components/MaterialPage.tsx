@@ -129,13 +129,26 @@ const MaterialPage = ({ material, onBack }: MaterialPageProps) => {
     <div className="rounded-2xl overflow-hidden shadow-lg border">
       <video
         autoPlay
-        muted
         controls
         playsInline
         className="w-full max-h-[70vh] object-cover"
         poster="/assets/siklus-thumbnail.jpg" // opsional thumbnail
       >
         <source src={currentMaterial.video} type="video/mp4" />
+        Browser Anda tidak mendukung pemutar video.
+      </video>
+    </div>
+
+     {/* video ilustrasi tambahan */}
+    <div className="rounded-2xl overflow-hidden shadow-lg border">
+      <video
+        autoPlay
+        controls
+        playsInline
+        className="w-full max-h-[70vh] object-cover"
+        poster="/assets/ilustrasi-thumbnail.jpg" // opsional thumbnail
+      >
+        <source src="/assets/ilustrasi.mp4" type="video/mp4" />
         Browser Anda tidak mendukung pemutar video.
       </video>
     </div>
